@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
         minlength: [3, "ERROR: Name Should be atleast 3 character long."],
         maxlength: [50, "ERROR: Name cannot exceed 50 characters."]
     },
+
     email: {
         type: String,
         required: [true, "Email is Required."],
@@ -19,6 +20,7 @@ const userSchema = mongoose.Schema({
             message: "ERROR: email should be in valid format"
         }
     },
+
     password: {
         type: String,
         required: [true, "WARNING: Password is required"],
@@ -37,6 +39,7 @@ const userSchema = mongoose.Schema({
             message: "WARNING: Password must be stronger"
         }
     },
+
     phoneNumber: {
         type: String,
         required: [true, "WARNING: Phone Number is required"],

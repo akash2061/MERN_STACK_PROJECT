@@ -6,7 +6,7 @@ exports.signup = async (req, res) => {
         const isExisting = await User.findOne({ email: email });
 
         if (isExisting) {
-            res.status(400).send({ message: "User Already Exist" });
+            return res.status(400).send({ message: "User Already Exist" });
         }
 
         const newUser = new User({ name: name, email: email, password: password, phoneNumber: phoneNumber });
@@ -18,6 +18,7 @@ exports.signup = async (req, res) => {
             const errors = Object.values(error.errors).map(error => error.message);
             return res.status(400).json({ message: "Validation Error", error: errors });
         }
+
         console.log(error.name);
         res.status(500).send(error);
     }
@@ -29,7 +30,7 @@ exports.login = async (req, res) => {
         const isExisting = await User.findOne({ email: email });
 
         if (!isExisting) {
-            res.status(404).send({ message: "User Not Found" });
+            return res.status(404).send({ message: "User Not Found" });
         };
 
         const isMatched = password === isExisting.password;
