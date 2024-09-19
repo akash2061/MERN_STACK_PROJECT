@@ -23,8 +23,22 @@ exports.signup = async (req, res) => {
     }
 }
 
-// let obj = {
-//     firstName: "Morningstar",
-//     lastName: "_2061"
-// }
-// Object.values(obj);
+exports.login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const isExisting = await User.findOne({ email: email });
+
+        if (!isExisting) {
+            res.status(404).send({ message: "User Not Found" });
+        };
+
+        const isMatched = password === isExisting.password;
+        if (!isMatched) {
+            return res.status(401).send({ message: "Invalid Password" });
+        }
+
+        res.status(200).send({ message: "User Logged-In", data: isExisting });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
