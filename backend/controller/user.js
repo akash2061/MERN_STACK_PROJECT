@@ -1,4 +1,5 @@
 const User = require("../model/user");
+const bcrypt = require("bcrypt");
 
 exports.signup = async (req, res) => {
     try {
@@ -9,8 +10,10 @@ exports.signup = async (req, res) => {
             return res.status(400).send({ message: "User Already Exist" });
         }
 
+        //! Encription of password
+        // const hashPassword = await bcrypt.hash(password, 10); 
         const newUser = new User({ name: name, email: email, password: password, phoneNumber: phoneNumber });
-
+        //! Use Middleware
         await newUser.save();
         res.status(201).send({ message: "Account Created" });
     } catch (error) {
@@ -33,7 +36,7 @@ exports.login = async (req, res) => {
             return res.status(404).send({ message: "User Not Found" });
         };
 
-        const isMatched = password === isExisting.password;
+        const isMatched = await bcrypt.compare(password, isExisting.password);
         if (!isMatched) {
             return res.status(401).send({ message: "Invalid Password" });
         }
