@@ -30,7 +30,8 @@ const Signup = () => {
         <div className="w-4/5 xl:h-4/5 lg:h-4/5 h-auto py-12 flex flex-col gap-10 md:flex-row sm:gap-8 md:gap-8 lg:gap-28 xl:gap-28 justify-center items-center bg-[#1C1C1E] shadow-2xl rounded-2xl md:py-8 sm:py-4 sm:mt-8">
             <div>
                 <img
-                    src="https://www.kali.org/images/kali-dragon-icon.svg"
+                    src="https://images.vexels.com/content/142810/preview/shield-emblem-logo-b04a88.png"
+                    // src="https://www.kali.org/images/kali-dragon-icon.svg"
                     // src="https://avatars.githubusercontent.com/u/113748706?v=4"
                     className="w-28 md:w-60"
                     alt="Profile"
@@ -38,7 +39,7 @@ const Signup = () => {
             </div>
             <div className="w-10/12 md:w-1/2 flex flex-col gap-8 md:justify-center md:items-center">
                 <h1 className="text-3xl text-wrap text-[#EAEAEA] font-semibold font-sans text-center">
-                    Welcome! Sign-Up
+                    Welcome!<br className="md:hidden" /> Sign-Up
                 </h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                     <div className="grid grid-cols-2 gap-3">
