@@ -1,64 +1,97 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react'
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { z } from 'zod';
 
-const Singup = () => {
+
+const Signup = () => {
     const validationSchema = z.object({
-        "name": z.string().min(1, "Name is required"),
-        "email": z.string().min(1, "Email is required").email("Invalid Email"),
-        "password": z.string().min(8, "password must be 8 character longs")
-            .regex(/[a-z]/, "Password must contain atleast 1 lowercase letter")
-            .regex(/[A-Z]/, "Password must contain atleast 1 uppercase letter")
-            .regex(/[0-9]/, "Password must contain atleast 1 Number")
-            .regex(/[\w_]/, "Password must contain atleast 1 spacial Character"),
-        "phoneNumber": z.string().min(10, "Phone Number must contain 10 numbers").max(10, "Phone Number must contain 10 numbers")
-    })
-    // const [formData, setFormData] = useState({
-    //     resolver: zodResolver(validationSchema)
-    // });
+        name: z.string().min(1, "Name is required"),
+        email: z.string().min(1, "Email is required").email("Invalid Email"),
+        password: z.string()
+            .min(8, "Password must be 8 characters long")
+            .regex(/[a-z]/, "Password must contain at least 1 lowercase letter")
+            .regex(/[A-Z]/, "Password must contain at least 1 uppercase letter")
+            .regex(/[0-9]/, "Password must contain at least 1 number")
+            .regex(/[\W_]/, "Password must contain at least 1 special character"),
+        phoneNumber: z.string().length(10, "Phone Number must be exactly 10 digits"),
+    });
+
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(validationSchema)
+        resolver: zodResolver(validationSchema),
     });
 
     const onSubmit = (data) => {
         console.log(data);
-    }
+    };
+
     return (
-        <div className='w-4/5 h-4/5 flex justify-center items-center bg-white shadow-2xl rounded'>
-            <div className='w-1/2'>
-                <img src="" alt="" className='w-full' />
+        <div className="w-4/5 xl:h-4/5 lg:h-4/5 h-auto py-12 flex flex-col gap-10 md:flex-row sm:gap-8 md:gap-8 lg:gap-28 xl:gap-28 justify-center items-center bg-[#1C1C1E] shadow-2xl rounded-2xl md:py-8 sm:py-4 sm:mt-8">
+            <div>
+                <img
+                    src="https://www.kali.org/images/kali-dragon-icon.svg"
+                    // src="https://avatars.githubusercontent.com/u/113748706?v=4"
+                    className="w-28 md:w-60"
+                    alt="Profile"
+                />
             </div>
-            <div className='w-1/2 flex flex-col gap-8'>
-                <h1 className='text-3xl text-blue-500 font-semibold text-center'>Welcome ! Sign-In</h1>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='grid grid-cols-2 gap-3'>
+            <div className="w-10/12 md:w-1/2 flex flex-col gap-8 md:justify-center md:items-center">
+                <h1 className="text-3xl text-wrap text-[#EAEAEA] font-semibold font-sans text-center">
+                    Welcome! Sign-Up
+                </h1>
+                <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+                    <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className='text-blue-500 font-medium'>Name</label>
-                            <br />
-                            <input type="text" className='p-2 border border-gray-500 outline-blue-500 w-[90%] my-2 rounded shadow-xl' {...register("name")} />
+                            <label className="text-[#EAEAEA] font-medium">Name</label>
+                            <input
+                                type="text"
+                                className={`p-2 border w-full my-2 rounded shadow-xl ${errors.name ? "border-[#FF453A] outline-none" : "border-[#2C2C2E] outline-[#007AFF]"}`}
+                                {...register("name")}
+                            />
+                            {errors.name && <span className="text-[#FF453A]">{errors.name.message}</span>}
                         </div>
                         <div>
-                            <label className='text-blue-500 font-medium'>Email</label>
-                            <br />
-                            <input type="email" className='p-2 border border-gray-500 outline-blue-500 w-[90%] my-2 rounded shadow-xl' {...register("email")} />
+                            <label className="text-[#EAEAEA] font-medium">Email</label>
+                            <input
+                                type="email"
+                                className={`p-2 border w-full my-2 rounded shadow-xl ${errors.email ? "border-[#FF453A] outline-none" : "border-[#2C2C2E] outline-[#007AFF]"}`}
+                                {...register("email")}
+                            />
+                            {errors.email && <span className="text-[#FF453A]">{errors.email.message}</span>}
                         </div>
                         <div>
-                            <label className='text-blue-500 font-medium'>Password</label>
-                            <br />
-                            <input type="password" className='p-2 border border-gray-500 outline-blue-500 w-[90%] my-2 rounded shadow-xl' {...register("password")} />
+                            <label className="text-[#EAEAEA] font-medium">Password</label>
+                            <input
+                                type="password"
+                                className={`p-2 border w-full my-2 rounded shadow-xl ${errors.password ? "border-[#FF453A] outline-none" : "border-[#2C2C2E] outline-[#007AFF]"}`}
+                                {...register("password")}
+                            />
+                            {errors.password && <span className="text-[#FF453A]">{errors.password.message}</span>}
                         </div>
                         <div>
-                            <label className='text-blue-500 font-medium'>Phone Number</label>
-                            <br />
-                            <input type="number" className='p-2 border border-gray-500 outline-blue-500 w-[90%] my-2 rounded shadow-xl' {...register("phoneNumber")} />
+                            <label className="text-[#EAEAEA] font-medium">Phone Number</label>
+                            <input
+                                type="text"
+                                className={`p-2 border w-full my-2 rounded shadow-xl ${errors.phoneNumber ? "border-[#FF453A] outline-none" : "border-[#2C2C2E] outline-[#007AFF]"}`}
+                                {...register("phoneNumber")}
+                            />
+                            {errors.phoneNumber && <span className="text-[#FF453A]">{errors.phoneNumber.message}</span>}
                         </div>
                     </div>
-                    <button className='bg-blue-500 my-5 text-white font-medium p-2 w-[95%] shadow-xl rounded active:bg-blue-600'>Sign-Up</button>
+                    <button className="bg-[#007AFF] my-5 text-[#EAEAEA] font-semibold p-2 w-full shadow-xl rounded active:bg-[#0056D1]">
+                        Sign-Up
+                    </button>
                 </form>
+                <div className='text-[#EAEAEAEA] text-center'>
+                    <p>
+                        Have an account?
+                        <Link href="/login" target="_self" rel="noopener noreferrer" className="text-[#0056D1] hover:underline ml-2">Login</Link>
+                    </p>
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Singup
+export default Signup;
