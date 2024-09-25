@@ -1,8 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { z } from 'zod';
+import { signup } from '../redux/slices/authSlice';
 
 
 const Signup = () => {
@@ -22,8 +24,9 @@ const Signup = () => {
         resolver: zodResolver(validationSchema),
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const dispatch = useDispatch();
+    const onSubmit = async (data) => {
+        dispatch(signup(data));
     };
 
     return (
