@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 exports.signup = async (req, res, next) => {
     try {
-        const { name, email, password, phoneNumber } = req.body;
+        const { name, email, password, phoneNumber, role } = req.body;
         const isExisting = await User.findOne({ email: email });
 
         if (isExisting) {
@@ -15,7 +15,7 @@ exports.signup = async (req, res, next) => {
 
         //! Encription of password
         // const hashPassword = await bcrypt.hash(password, 10); 
-        const newUser = new User({ name: name, email: email, password: password, phoneNumber: phoneNumber });
+        const newUser = new User({ name: name, email: email, password: password, phoneNumber: phoneNumber, role });
         //! Use Middleware
         await newUser.save();
         res.status(201).send({ message: "Account Created", data: newUser });

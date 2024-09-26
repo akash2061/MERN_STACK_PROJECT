@@ -7,8 +7,13 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, "ERROR: Name is Required."],
         minlength: [3, "ERROR: Name Should be atleast 3 character long."],
-        maxlength: [50, "ERROR: Name cannot exceed 50 characters."]
-        //! Add Validation https://github.com/shubhammt123/techno/tree/main/TR4
+        maxlength: [50, "ERROR: Name cannot exceed 50 characters."],
+        // validate: {
+        //     validator: function (value) {
+        //         return validator.isAlpha(value, "en-US", { ignore: " " });
+        //     },
+        //     message: "Name should be in String"
+        // }
     },
 
     email: {
@@ -52,6 +57,13 @@ const userSchema = mongoose.Schema({
             message: "ERROR: Phone number should be valid"
         }
     },
+
+    role: {
+        type: String,
+        required: [true, "Role is required"],
+        enum: ["User", "Admin"],
+        default: "User"
+    }
 });
 
 userSchema.pre("save", async function (next) {
