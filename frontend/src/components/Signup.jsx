@@ -25,6 +25,9 @@ const Signup = () => {
     });
 
     const dispatch = useDispatch();
+    const handleGoogleLogin = () => {
+        window.location.href = "http://localhost:5000/api/auth/google";
+    }
     const onSubmit = async (data) => {
         dispatch(signup(data));
     };
@@ -47,7 +50,7 @@ const Signup = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                     <div className="grid grid-cols-2 gap-3">
                         <div className='mr-3'>
-                            <label className="text-[#EAEAEA] font-medium">Name</label>
+                            <label className="text-[#EAEAEA] font-semibold">Name</label>
                             <input
                                 type="text"
                                 className={`p-2 border w-full my-2 rounded shadow-xl ${errors.name ? "border-[#FF453A] outline-none" : "border-[#2C2C2E] outline-[#007AFF]"}`}
@@ -56,7 +59,7 @@ const Signup = () => {
                             {errors.name && <span className="text-[#FF453A]">{errors.name.message}</span>}
                         </div>
                         <div className='ml-3'>
-                            <label className="text-[#EAEAEA] font-medium">Email</label>
+                            <label className="text-[#EAEAEA] font-semibold">Email</label>
                             <input
                                 type="email"
                                 className={`p-2 border w-full my-2 rounded shadow-xl ${errors.email ? "border-[#FF453A] outline-none" : "border-[#2C2C2E] outline-[#007AFF]"}`}
@@ -65,7 +68,7 @@ const Signup = () => {
                             {errors.email && <span className="text-[#FF453A]">{errors.email.message}</span>}
                         </div>
                         <div className='mr-3'>
-                            <label className="text-[#EAEAEA] font-medium">Password</label>
+                            <label className="text-[#EAEAEA] font-semibold">Password</label>
                             <input
                                 type="password"
                                 className={`p-2 border w-full my-2 rounded shadow-xl ${errors.password ? "border-[#FF453A] outline-none" : "border-[#2C2C2E] outline-[#007AFF]"}`}
@@ -74,7 +77,7 @@ const Signup = () => {
                             {errors.password && <span className="text-[#FF453A]">{errors.password.message}</span>}
                         </div>
                         <div className='ml-3'>
-                            <label className="text-[#EAEAEA] font-medium">Phone Number</label>
+                            <label className="text-[#EAEAEA] font-semibold">Phone Number</label>
                             <input
                                 type="text"
                                 className={`p-2 border w-full my-2 rounded shadow-xl ${errors.phoneNumber ? "border-[#FF453A] outline-none" : "border-[#2C2C2E] outline-[#007AFF]"}`}
@@ -87,12 +90,15 @@ const Signup = () => {
                         Sign-Up
                     </button>
                 </form>
+                <button className='bg-red-500 my-5 text-white font-medium p-2 w-[90%] shadow-xl w-[95%] rounded active:bg-blue-600' onClick={handleGoogleLogin}>Log-In- With Google</button>
+
                 <div className='text-[#EAEAEAEA] text-center'>
                     <p>
                         Have an account?
-                        <Link href="/login" target="_self" rel="noopener noreferrer" className="text-[#0056D1] hover:underline ml-2">Login</Link>
+                        <Link to="/login" className="text-[#0056D1] hover:underline ml-2">Login</Link>
                     </p>
                 </div>
+
             </div>
         </div>
     );
