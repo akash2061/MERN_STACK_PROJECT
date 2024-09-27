@@ -22,6 +22,10 @@ const Login = () => {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+    const handleGoogleLogin = ()=>{
+        window.location.href = "http://localhost:5000/api/auth/google";
+    }
+
     const onSubmit = (data) => {
         dispatch(login(data));
     };
@@ -72,6 +76,8 @@ const Login = () => {
                         Login
                     </button>
                 </form>
+                <button className='bg-red-500 my-5 text-white font-medium p-2 w-[90%] shadow-xl rounded active:bg-blue-600' onClick={handleGoogleLogin}>Log-In- With Google</button>
+
                 <div className='text-[#EAEAEAEA] text-center'>
                     <p>
                         Create account:

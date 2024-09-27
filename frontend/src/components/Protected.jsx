@@ -11,11 +11,13 @@ const Protected = (allowedRole) => {
             return navigate("/");
         }
     }, [isAuth]);
+
     useEffect(() => {
-        if (!allowedRole.includes(role)) {
-            return navigate("/");
+        if(!allowedRole.includes(role)){
+            return navigate("/")
         }
-    }, [role]);
+    }, [role])
+
     return (
         <div>
             <Navbar />

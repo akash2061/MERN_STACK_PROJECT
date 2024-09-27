@@ -3,77 +3,86 @@ const validator = require("validator");
 const bcrypt = require("bcrypt");
 
 const userSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, "ERROR: Name is Required."],
-        minlength: [3, "ERROR: Name Should be atleast 3 character long."],
-        maxlength: [50, "ERROR: Name cannot exceed 50 characters."],
-        // validate: {
-        //     validator: function (value) {
-        //         return validator.isAlpha(value, "en-US", { ignore: " " });
+    googleId : {
+        type : String,
+        default : null
+    },
+    name : {
+        type : String,
+        required : [true , "Name is required"],
+        minlength : [3 , "Name should be atleast 3 charater long"],
+        maxlength : [50, "Name cannot exceed 50 charaters"],
+        // validate :  {
+        //     validator : function(value){
+        //         return validator.isAlpha(value , "en-US" , {ignore : " "});
         //     },
-        //     message: "Name should be in String"
+        //     message : "Name should be in String"
         // }
     },
-
-    email: {
-        type: String,
-        required: [true, "Email is Required."],
-        unique: true,
-        validate: {
-            validator: function (value) {
+    email : {
+        type : String,
+        required :  [true , "Email is required"],
+        unique : true,
+        validate :  {
+            validator : function(value){
                 return validator.isEmail(value);
             },
-            message: "ERROR: email should be in valid format"
+            message : "Email should be in valid format"
         }
     },
-
-    password: {
-        type: String,
-        required: [true, "WARNING: Password is required"],
-        minlength: [8, "ERROR: Password must be 8 character long"],
-        maxlength: [128, "ERROR: Password cannot exceed 128 characters."],
-        validate: {
-            validator: function (value) {
-                return validator.isStrongPassword(value, {
-                    minLength: 8,
-                    minLowercase: 1,
-                    minUppercase: 1,
-                    minNumbers: 1,
-                    minSymbols: 1
+    password : {
+        type : String,
+        required : function(){
+            return !this.googleId;
+        },
+        maxlength : [128, "Password cannot exceed 128 charater"],
+        validate : {
+            validator : function(value){
+                if(this.googleId){
+                    return true;
+                }
+                
+                return validator.isStrongPassword(value,{
+                    minLength : 8,
+                    minLowercase : 1,
+                    minUppercase : 1,
+                    minNumbers : 1,
+                    minSymbols : 1            
                 })
             },
-            message: "WARNING: Password must be stronger"
-        }
+            message :  "Password must be stronger"
+        },
     },
-
-    phoneNumber: {
-        type: String,
-        required: [true, "WARNING: Phone Number is required"],
-        validate: {
-            validator: function (value) {
-                return validator.isMobilePhone(value, "en-IN")
+    phoneNumber : {
+        type : String,
+        required : function(){
+            return !this.googleId;
+        },
+        validate : {
+            validator : function(value){
+                if(this.googleId){
+                    return true;
+                }
+                return validator.isMobilePhone(value , "en-IN")
             },
-            message: "ERROR: Phone number should be valid"
+            message : "Phone number should be valid"
         }
     },
-
-    role: {
-        type: String,
-        required: [true, "Role is required"],
-        enum: ["User", "Admin"],
-        default: "User"
+    role : {
+        type : String,
+        required : [true,"Role is required"],
+        enum : ["User","Admin"],
+        default : "User"
     }
 });
 
-userSchema.pre("save", async function (next) {
-    // console.log("\nBefore Saving the Docx & after validation the schema\n", this);
+userSchema.pre("save",async function(next){
+    
     const user = this;
-    if (!user.isModified("password")) return next();
-    const hashPass = await bcrypt.hash(user.password, 10);
-    user.password = hashPass;
-    // console.log(user);
+    if(!user.isModified("password") || user.googleId) return next();
+    const hashedPassword = await bcrypt.hash(user.password , 10);
+    user.password =  hashedPassword;
     next();
-});
+})
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User" , userSchema);

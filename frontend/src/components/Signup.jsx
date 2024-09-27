@@ -25,6 +25,9 @@ const Signup = () => {
     });
 
     const dispatch = useDispatch();
+    const handleGoogleLogin = () => {
+        window.location.href = "http://localhost:5000/api/auth/google";
+    }
     const onSubmit = async (data) => {
         dispatch(signup(data));
     };
@@ -87,12 +90,15 @@ const Signup = () => {
                         Sign-Up
                     </button>
                 </form>
+                <button className='bg-red-500 my-5 text-white font-medium p-2 w-[90%] shadow-xl w-[95%] rounded active:bg-blue-600' onClick={handleGoogleLogin}>Log-In- With Google</button>
+
                 <div className='text-[#EAEAEAEA] text-center'>
                     <p>
                         Have an account?
                         <Link to="/login" className="text-[#0056D1] hover:underline ml-2">Login</Link>
                     </p>
                 </div>
+
             </div>
         </div>
     );
