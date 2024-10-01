@@ -14,11 +14,11 @@ const Navbar = () => {
 
     return (
         <div className='flex justify-between items-center bg-sky-950 px-6 py-4 w-full'>
-            <div className='text-white text-2xl font-medium'>
+            <div className='text-[#EAEAEA] text-2xl font-medium'>
                 Logo
             </div>
             <div>
-                <input type="text" placeholder='Search...' className='p-2 py-1 border border-gray-100 bg-transparent text-white outline-none' />
+                <input type="text" placeholder='Search...' className='p-2 py-1 border border-gray-100 bg-transparent text-[#EAEAEA] outline-none' />
             </div>
             <div className='flex gap-5 items-center'>
                 {
@@ -28,7 +28,7 @@ const Navbar = () => {
                             role === "User"
                                 ?
                                 (
-                                    <div className='flex gap-5 text-white'>
+                                    <div className='flex gap-5 text-[#EAEAEA]'>
                                         <Link to="/cart">Cart</Link>
                                         <Link to="/myorder">My-Orders</Link>
                                         <Link to="/profile">Profile</Link>
@@ -36,7 +36,7 @@ const Navbar = () => {
                                 )
                                 :
                                 (
-                                    <div className='flex gap-5 text-white'>
+                                    <div className='flex gap-5 text-[#EAEAEA]'>
                                         <Link to="/dashboard">Dashboard</Link>
                                         <Link to="/adminUser">Users</Link>
                                         <Link to="/adminProduct">Products</Link>
@@ -47,7 +47,7 @@ const Navbar = () => {
                         )
                         :
                         (
-                            <div className='flex gap-5 text-white'>
+                            <div className='flex gap-5 text-[#EAEAEA]'>
                                 <Link to="/cart">Cart</Link>
                                 <Link to="/login">Login</Link>
                                 <Link to="/signup">Signup</Link>
@@ -55,7 +55,7 @@ const Navbar = () => {
                         )
                 }
                 {isAuth && (
-                    <button className='text-xl text-white' onClick={handleLogOut}><FiLogOut /></button>
+                    <button className='text-xl text-[#EAEAEA]' onClick={handleLogOut}><FiLogOut /></button>
                 )}
             </div>
 
