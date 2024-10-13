@@ -3,195 +3,113 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import Signup from '../components/Signup'
 import Login from '../components/Login'
 import Home from '../components/Home'
-import Cart from '../components/Cart'
-import UnProtected from '../components/UnProtected'
-import Protected from '../components/Protected'
-import Order from '../components/Order'
-import MyOrder from '../components/MyOrder'
-import Dashboard from '../components/Dashboard'
-import AdminUser from '../components/AdminUser'
-import AdminProduct from '../components/AdminProduct'
-import AdminOrder from '../components/AdminOrder'
 import Profile from '../components/Profile'
-import OpenRoutes from '../components/OpenRoutes'
+import Cart from '../components/Cart'
+import Unprotected from '../components/Unprotected'
+import AdminPrivate from '../components/AdminPrivate'
+import Dashbaord from '../components/Dashbaord'
+import AdminProduct from '../components/AdminProduct'
+import AdminUser from '../components/AdminUser'
+import AdminOrder from '../components/AdminOrder'
+import UserPrivate from '../components/UserPrivate'
+import MyOrder from '../components/MyOrder'
+import Order from '../components/Order'
+import UserAdminPrivate from '../components/UserAdminPrivate'
+import Private from '../components/Private'
+import OpenRoute from '../components/OpenRoute'
 import GoogleAuth from '../components/GoogleAuth'
+import SuccessPayment from '../components/SuccessPayment'
+import CancelPayment from '../components/CancelPayment'
 
 const Router = createBrowserRouter([
     {
-        element: <OpenRoutes />,
-        children: [{
-            path: "/",
-            element: <Home />
+        element : <OpenRoute />,
+        children : [
+            {
+            path : "/",
+            element : <Home />
         },
         {
-            path: "/cart",
-            element: <Cart />
-        },]
+            path : "/cart",
+            element : <Cart />
+        },
+        {
+            path : "/googleAuth",
+            element : <GoogleAuth />
+        },
+        {
+            path : "/paymentsuccess",
+            element  : <SuccessPayment />
+        },
+        {
+            path : "/cancelPayment",
+            element  : <CancelPayment />
+        },
+    ]
     },
     {
-        element: <UnProtected />,
-        children: [
+        element : <Unprotected />,
+        children : [
             {
-                path: "/login",
-                element: <Login />
+                path : "/login",
+                element : <Login />
             },
             {
-                path: "/Signup",
-                element: <Signup />
-            },
-            {
-                path: "/googleauth",
-                element: <GoogleAuth/>
-            },
-        ]
-    },
-    {
-        element: <Protected allowedRole={["User"]} />,
-        children: [
-            {
-                path: "/order",
-                element: <Order />
-            },
-            {
-                path: "/myorder",
-                element: <MyOrder />
+                path : "/signup",
+                element : <Signup />
             }
         ]
     },
     {
-        element: <Protected allowedRole={["Admin"]} />,
-        children: [
+        element : <Private allowedRole = {["Admin"]} />,
+        children : [
             {
-                path: "/dashboard",
-                element: <Dashboard />
+                path : "/dashboard",
+                element : <Dashbaord />
             },
             {
-                path: "/adminuser",
-                element: <AdminUser />
+                path : "/adminProduct",
+                element : <AdminProduct />
             },
             {
-                path: "/adminproduct",
-                element: <AdminProduct />
+                path : "/adminUser",
+                element : <AdminUser />
             },
             {
-                path: "/adminorder",
-                element: <AdminOrder />
+                path : "/adminOrder",
+                element : <AdminOrder />
             },
         ]
     },
     {
-        element: <Protected allowedRole={["User", "Admin"]} />,
-        children: [
+        element : <Private allowedRole={["User"]} />,
+        children : [
             {
-                path: "/profile",
-                element: <Profile />
+                path : "/myorder",
+                element : <MyOrder />
+            },
+            {
+                path : "/order",
+                element : <Order />
+            }
+        ]
+    },
+    {
+        element : <Private allowedRole={["Admin" , "User"]}  />,
+        children : [
+            {
+                path  : "/profile",
+                element : <Profile />
             }
         ]
     }
 ])
 
+
+// /login , /signup --- can access without login , but if logged in then not accessible
+// /profile  --- can accessible by user and admin
+// /dashboard , /adminProduct , /adminUser , /adminOrder --- admin
+// /myOrders , /order  --- user
+// / , /cart   ---- anyone
+
 export default Router
-
-// /login , /signup --- anyone but not logged-in user
-// /cart , / --- anyone
-// /profile --- both admin and user
-// /dashboard , /adminuser , /adminproduct , /adminorder --- Admin
-// /order , /myorders --- User
-
-
-
-// import React from 'react'
-// import { createBrowserRouter, Navigate } from 'react-router-dom'
-// import Singup from '../components/Signup'
-// import Login from '../components/Login'
-// import Home from '../components/Home'
-// import Cart from '../components/Cart'
-// import UnProtected from '../components/UnProtected'
-// import Protected from '../components/Protected'
-// import MyOrder from '../components/MyOrder'
-// import Order from '../components/Order'
-// import Dashboard from '../components/Dashboard'
-// import AdminUser from '../components/AdminUser'
-// import AdminProduct from '../components/AdminProduct'
-// import AdminOrder from '../components/AdminOrder'
-// import Profile from '../components/Profile'
-// import OpenRoutes from '../components/OpenRoutes'
-// import GoogleAuth from '../components/GoogleAuth'
-
-// const Router = createBrowserRouter([
-//     {
-//         element: <OpenRoutes />,
-//         children: [
-//             {
-//                 path: "/",
-//                 element: <Home />
-//             },
-//             {
-//                 path: "/cart",
-//                 element: <Cart />
-//             }
-//         ]
-//     },
-//     {
-//         element: <UnProtected />,
-//         children: [
-//             {
-//                 path: "/login",
-//                 element: <Login />
-//             },
-//             {
-//                 path: "/signup",
-//                 element: <Singup />
-//             },
-//             {
-//                 path: "/googleauth",
-//                 element: <GoogleAuth/>
-//             },
-//         ]
-//     },
-//     {
-//         element: <Protected allowedRole={["User"]} />,
-//         children: [
-//             {
-//                 path: "/order",
-//                 element: <Order />
-//             },
-//             {
-//                 path: "/myorder",
-//                 element: <MyOrder />
-//             }
-//         ]
-//     },
-//     {
-//         element: <Protected allowedRole={["Admin"]} />,
-//         children: [
-//             {
-//                 path: "/dashboard",
-//                 element: <Dashboard />
-//             },
-//             {
-//                 path: "/adminuser",
-//                 element: <AdminUser />
-//             },
-//             {
-//                 path: "/adminproduct",
-//                 element: <AdminProduct />
-//             },
-//             {
-//                 path: "/adminorder",
-//                 element: <AdminOrder />
-//             },
-//         ]
-//     },
-//     {
-//         element: <Protected allowedRole={["User", "Admin"]} />,
-//         children: [
-//             {
-//                 path: "/profile",
-//                 element: <Profile />
-//             }
-//         ]
-//     }
-// ])
-
-// export default Router
