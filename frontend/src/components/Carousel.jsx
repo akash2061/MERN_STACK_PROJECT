@@ -28,7 +28,7 @@ const Carousel = () => {
             alt="Image 1"
             className="w-full h-auto rounded-lg"
           />
-          <div className="absolute top-1/2 left-1/2 text-[#EAEAEA] bg-black bg-opacity-50 p-4 rounded-lg transform -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute top-1/2 left-1/2 backdrop-blur-sm text-[#EAEAEA] font-semibold bg-black bg-opacity-50 p-4 rounded-lg transform -translate-x-1/2 -translate-y-1/2">
             <h2 className="text-lg md:text-2xl font-bold">WiFi Pentesting</h2>
             <p>Pentest WiFi with the industry standard platforms. <br />Equip your red team with the enterprise-ready WiFi Pineapple® and accessories.</p>
           </div>
@@ -39,7 +39,7 @@ const Carousel = () => {
             alt="Image 2"
             className="w-full h-auto rounded-lg"
           />
-          <div className="absolute bottom-5 left-5 text-[#EAEAEA] bg-black bg-opacity-50 p-4 rounded-lg">
+          <div className="absolute bottom-5 left-5 backdrop-blur-sm text-[#EAEAEA] font-semibold bg-black bg-opacity-50 p-4 rounded-lg">
             <h2 className="text-2xl font-bold">Hotplug Attack & IT Automation.</h2>
             <p>With a few seconds of physical access, all bets are off...</p>
           </div>
