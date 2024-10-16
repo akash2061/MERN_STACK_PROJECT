@@ -35,7 +35,7 @@ const Home = () => {
           {filterProductsByCategory('Tech Items').map((item, i) => (
             <div
               key={i}
-              className="relative bg-[#e3c5ff6b] p-4 shadow-xl rounded-lg overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-150 ease-out"
+              className="relative bg-white p-4 shadow-xl rounded-lg overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-150 ease-out"
             >
               <img
                 src={`http://localhost:5000/${item.productUrl}`}
@@ -67,7 +67,7 @@ const Home = () => {
           {filterProductsByCategory('Gadgets-Weaponry').map((item, i) => (
             <div
               key={i}
-              className="relative bg-[#e3c5ff6b] p-4 shadow-xl rounded-lg overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-150 ease-out"
+              className="relative bg-white p-4 shadow-xl rounded-lg overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-150 ease-out"
             >
               <img
                 src={`http://localhost:5000/${item.productUrl}`}
@@ -99,7 +99,7 @@ const Home = () => {
           {filterProductsByCategory('Accessories').map((item, i) => (
             <div
               key={i}
-              className="relative bg-[#e3c5ff6b] p-4 shadow-xl rounded-lg overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-150 ease-out"
+              className="relative bg-white p-4 shadow-xl rounded-lg overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-150 ease-out"
             >
               <img
                 src={`http://localhost:5000/${item.productUrl}`}
@@ -131,7 +131,7 @@ const Home = () => {
           {filterProductsByCategory('Smart Devices - EXOs').map((item, i) => (
             <div
               key={i}
-              className="relative bg-[#e3c5ff6b] p-4 shadow-xl rounded-lg overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-150 ease-out"
+              className="relative bg-white p-4 shadow-xl rounded-lg overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-150 ease-out"
             >
               <img
                 src={`http://localhost:5000/${item.productUrl}`}
